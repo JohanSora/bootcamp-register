@@ -7,7 +7,7 @@ import { DataContext } from "../DataContext";
 import AddtoCalendar from "./AddtoCalendar";
 import { useEffect } from "react";
 
-const Form = ({ country, company }) => {
+const Form = ({ country, company, setCompany }) => {
   const { info, setInfo } = useContext(DataContext);
 
   const [name, setName] = useState("");
@@ -164,7 +164,10 @@ const Form = ({ country, company }) => {
                     : (alert(
                         "Lo lamento, no estás dentro de nuestra base de datos de empresas invitadas"
                       ),
-                      setEmail(""));
+                      setEmail(""),
+                      setName(""),
+                      setOcuppation(""),
+                      setCompany(""));
                 }}
               />
             </div>

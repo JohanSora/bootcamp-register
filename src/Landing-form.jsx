@@ -49,7 +49,11 @@ const LandingForm = () => {
                 invitados!
               </p>
             </div>
-            <Form country={registerCountry} company={company} />
+            <Form
+              country={registerCountry}
+              company={company}
+              setCompany={setCompany}
+            />
           </>
         );
       }
