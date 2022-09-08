@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Radio, Modal } from "@mantine/core";
 import AdobeLg from "../assets/logo Adobe.png";
 import axios from "axios";
+import { DataContext } from "../DataContext";
+import AddtoCalendar from "./AddtoCalendar";
+import { useEffect } from "react";
 
 const Form = ({ country, company }) => {
+  const { info, setInfo } = useContext(DataContext);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [occupation, setOcuppation] = useState("");
@@ -19,6 +24,8 @@ const Form = ({ country, company }) => {
   const [timeexit, setTimeexit] = useState("");
 
   const [modal, setModal] = useState(false);
+
+  const ejemplo = ["amd", "intel", "nvidia", "lenovo", "dell"];
 
   const city = () => {
     if (country === "Colombia") {
@@ -36,18 +43,19 @@ const Form = ({ country, company }) => {
     const formdata = new FormData();
 
     formdata.append("País", country);
-    formdata.append("compañia", company);
-    formdata.append("nombre", name);
-    formdata.append("cargo", occupation);
-    formdata.append("email", email);
-    formdata.append("nacionalidad", Nacionality);
-    formdata.append("fecha de nacimiento", dateBorn);
-    formdata.append("dirección", address);
-    formdata.append("numero de pasaporte", passport);
-    formdata.append("dia de llegada", datearrival);
-    formdata.append("hora de llegada", timearrival);
-    formdata.append("dia de salida", dateexit);
-    formdata.append("hora de salida", timeexit);
+    formdata.append("Empresa", company);
+    formdata.append("Nombre-Completo", name);
+    formdata.append("Cargo", occupation);
+    formdata.append("Email", email);
+    formdata.append("Nacionalidad", Nacionality);
+    formdata.append("Visita-fuera-de-la-ciudad?", visit);
+    formdata.append("Fecha-de-nacimiento", dateBorn);
+    formdata.append("Dirección", address);
+    formdata.append("#pasaporte", passport);
+    formdata.append("día-de-llegada", datearrival);
+    formdata.append("hora-de-llegada", timearrival);
+    formdata.append("dia-de-salida", dateexit);
+    formdata.append("hora-de-salida", timeexit);
 
     axios
       .post("https://hooks.zapier.com/hooks/catch/666990/be1t6ge/", formdata)
@@ -55,29 +63,16 @@ const Form = ({ country, company }) => {
         res;
       });
 
-    // setModal(true);
+    setModal(true);
 
-    console.log({
-      company,
-      name,
-      occupation,
-      email,
-      Nacionality,
-      dateBorn,
-      address,
-      passport,
-      datearrival,
-      timearrival,
-      dateexit,
-      timeexit,
-    });
+    console.log(info);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (visit === "") {
-      alert("¿Nos visitas fuera de la ciudad de bogonbbtá?");
+      alert("¿Nos visitas fuera de la ciudad de bogotá?");
       return;
     }
     return handleForm();
@@ -88,25 +83,47 @@ const Form = ({ country, company }) => {
       <Modal
         opened={modal}
         onClose={() => {
-          setCompany("");
+          const objregister = {
+            País: country,
+            Empresa: company,
+            "Nombre-Completo": name,
+            Cargo: occupation,
+            Email: email,
+            Nacionalidad: Nacionality,
+            "Visita-fuera-de-la-ciudad?": visit,
+            "Fecha-de-nacimiento": dateBorn,
+            Dirección: address,
+            "#pasaporte": passport,
+            "día-de-llegada": datearrival,
+            "hora-de-llegada": timearrival,
+            "dia-de-salida": dateexit,
+            "hora-de-salida": timeexit,
+          };
+
+          setInfo([...info, objregister]);
+
           setName("");
           setEmail("");
-          setTerms("");
-          window.location.href = "https://documentcloudforbusiness.com/";
+          setOcuppation("");
+          setVisit("");
+          setNacionality("");
+          setDateBorn("");
+          setAdress("");
+          setPassport("");
+          setDatearrival("");
+          setTimearrival("");
+          setDateexit("");
+          setTimeexit("");
+          setModal(false);
         }}
       >
         <div className="info-modal">
           <img src={AdobeLg} alt="adobelogo" width={166} />
-          <p>Muchas gracias, recibimos tus datos con éxito.</p>
-          {visit === "Yes" && (
-            <p className="cooming-soon">
-              Pronto recibirás por correo electrónico más información sobre el
-              evento.
-            </p>
-          )}
+          <p>Muchas gracias, recibimos los datos del invitado con Exito.</p>
+          <AddtoCalendar country={country} />
         </div>
       </Modal>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="on">
         <div className="form-and-extra-info">
           <div className="container-form-inputs">
             <div className="form-input">
@@ -138,6 +155,17 @@ const Form = ({ country, company }) => {
                 value={email}
                 required
                 onChange={(e) => setEmail(e.target.value)}
+                onBlur={(e) => {
+                  const confirmation = e.target.value
+                    .split("@")[1]
+                    .split(".")[0];
+                  return ejemplo.includes(confirmation)
+                    ? null
+                    : (alert(
+                        "Lo lamento, no estás dentro de nuestra base de datos de empresas invitadas"
+                      ),
+                      setEmail(""));
+                }}
               />
             </div>
           </div>

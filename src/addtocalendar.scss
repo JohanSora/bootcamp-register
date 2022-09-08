@@ -1,0 +1,20 @@
+.title-add-to-calendar {
+  margin: 0px 0px 10px 0px;
+  text-align: center;
+  font-size: 17px;
+  line-height: 150%;
+  color: #000;
+  font-weight: bold;
+  .container-imgs-addtocalendar {
+    margin: 0px 0px 10px 0px;
+    text-align: center;
+    font-size: 0px;
+    a {
+      display: inline;
+    }
+    img {
+      display: inline;
+      width: 45px;
+    }
+  }
+}

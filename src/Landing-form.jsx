@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useMemo, useRef } from "react";
 import { useState } from "react";
 import Banner from "./assets/banner.png";
 import { Radio, Modal } from "@mantine/core";
@@ -22,6 +22,40 @@ const LandingForm = () => {
     setRegisterCountry(utms[1].slice(8));
   }, []);
 
+  const dataUsers = useMemo(() => {
+    const infoCompany = info.filter(({ Empresa }) => Empresa === company);
+    const infoCompanyObj = {
+      name: company,
+      invitados: infoCompany.length,
+    };
+    return infoCompanyObj;
+  }, [company, info]);
+
+  const formApperConditional = () => {
+    if (company !== "") {
+      if (dataUsers.invitados >= 2) {
+        return (
+          <div className="remaining-guests">
+            <p>Ya hay dos invitados registrados</p>
+          </div>
+        );
+      }
+      if (dataUsers.invitados >= 0) {
+        return (
+          <>
+            <div className="remaining-guests">
+              <p>
+                ¡Hola, {company} Puedes registrar {2 - dataUsers.invitados}{" "}
+                invitados!
+              </p>
+            </div>
+            <Form country={registerCountry} company={company} />
+          </>
+        );
+      }
+    }
+  };
+  console.log(dataUsers);
   return (
     <>
       <div id="App">
@@ -46,19 +80,17 @@ const LandingForm = () => {
                         onChange={(e) => setCompany(e.target.value)}
                       >
                         <option value="">Selecciona tu empresa</option>
-                        <option value="wdqw">wqd</option>
-                        <option value="qwe">qwr</option>
-                        <option value="jty">tyj</option>
-                        <option value="qwd">uyi</option>
+                        <option value="AMD">AMD</option>
+                        <option value="Intel">Intel</option>
+                        <option value="Nvidia">Nvidia</option>
+                        <option value="Lenovo">Lenovo</option>
+                        <option value="Dell">Dell</option>
                       </select>
                     </div>
                   </div>
                 </div>
               </form>
-              {company !== "" && (
-                <Form country={registerCountry} company={company} />
-              )}
-
+              {formApperConditional()}
               <h2 className="acrobat-resolve">¡Acrobat lo resuelve!</h2>
             </div>
           </div>

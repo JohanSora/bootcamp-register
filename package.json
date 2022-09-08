@@ -12,8 +12,10 @@
     "@emotion/react": "^11.10.4",
     "@mantine/core": "^5.2.6",
     "@mantine/hooks": "^5.2.6",
+    "add-to-calendar-button": "^1.15.0",
     "axios": "^0.27.2",
     "react": "^18.2.0",
+    "react-add-to-calendar": "^0.1.5",
     "react-dom": "^18.2.0",
     "sass": "^1.54.8"
   },
