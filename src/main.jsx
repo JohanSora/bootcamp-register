@@ -3,11 +3,16 @@ import ReactDOM from "react-dom/client";
 import LandingForm from "./Landing-form";
 import "./index.scss";
 import { DataProvider } from "./DataContext";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DataProvider>
-      <LandingForm />
-    </DataProvider>
+    <BrowserRouter>
+      <DataProvider>
+        <Routes>
+          <Route path=":id" element={<LandingForm />} />
+        </Routes>
+      </DataProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
