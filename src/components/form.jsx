@@ -166,8 +166,7 @@ const Form = ({ country, company, setCompany }) => {
                       ),
                       setEmail(""),
                       setName(""),
-                      setOcuppation(""),
-                      setCompany(""));
+                      setOcuppation(""));
                 }}
               />
             </div>
