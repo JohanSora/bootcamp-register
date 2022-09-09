@@ -45,8 +45,8 @@ const LandingForm = () => {
           <>
             <div className="remaining-guests">
               <p>
-                ¡Hola, {company} Puedes registrar {2 - dataUsers.invitados}{" "}
-                invitados!
+                ¡Hola {company}, puedes registrar {2 - dataUsers.invitados}{" "}
+                {dataUsers.invitados === 1 ? "invitado" : "invitados"}!
               </p>
             </div>
             <Form
