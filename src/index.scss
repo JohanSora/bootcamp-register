@@ -46,6 +46,8 @@
         }
 
         .remaining-guests {
+          display: flex;
+          flex-direction: column;
           width: 100%;
           border: 3px solid rgb(200, 21, 21);
           margin-bottom: 50px;
@@ -56,6 +58,7 @@
           background-color: rgb(200, 21, 21, 0.375);
           color: #ffffff;
           text-shadow: 0px 1px 3px #000000;
+          gap: 20px;
         }
 
         form {

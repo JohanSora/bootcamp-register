@@ -46,7 +46,7 @@ const Form = ({ company, companys }) => {
   const handleForm = () => {
     const formdata = new FormData();
 
-    formdata.append("País", country.País);
+    formdata.append("País", String(country.País));
     formdata.append("Empresa", company);
     formdata.append("Nombre-Completo", name);
     formdata.append("Cargo", occupation);

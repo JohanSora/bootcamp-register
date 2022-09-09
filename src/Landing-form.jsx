@@ -36,11 +36,25 @@ const LandingForm = () => {
       );
     }
 
+    const [country] = companys.filter(({ Empresa }) => Empresa === company);
+
     if (company !== "") {
       if (dataUsers.invitados >= 2) {
         return (
           <div className="remaining-guests">
-            <p>Ya hay dos invitados registrados</p>
+            <p>
+              Muchas gracias por registrarte en nuestro evento, te informamos
+              que ya tienes asignados los dos cupos.
+            </p>
+            <p>
+              Si tienes alguna pregunta no dudes en contactarte con{" "}
+              {country.País === "Colombia"
+                ? "mar31510@adobe.com y sou52478@adobe.com"
+                : country.País === "México"
+                ? "mar31510@adobe.com"
+                : "sou52478@adobe.com"}
+              .
+            </p>
           </div>
         );
       }
