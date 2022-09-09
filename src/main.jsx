@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <DataProvider>
         <Routes>
-          <Route path=":id" element={<LandingForm />} />
+          <Route path="/" element={<LandingForm />} />
         </Routes>
       </DataProvider>
     </BrowserRouter>
