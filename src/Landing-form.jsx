@@ -12,14 +12,8 @@ import Form from "./components/form";
 import { DataContext } from "./DataContext";
 
 const LandingForm = () => {
-  let [registerCountry, setRegisterCountry] = useState();
   const [company, setCompany] = useState("");
   const { info, companys, setCompanys } = useContext(DataContext);
-
-  useEffect(() => {
-    const utms = window.location.pathname.split("-");
-    setRegisterCountry(utms[1].slice(8));
-  }, []);
 
   const dataUsers = useMemo(() => {
     const infoCompany = info.filter(({ Empresa }) => Empresa === company);
@@ -31,6 +25,17 @@ const LandingForm = () => {
   }, [company, info]);
 
   const formApperConditional = () => {
+    if (company === "ADOBE") {
+      return (
+        <>
+          <div className="remaining-guests">
+            <p>¡Hola Adobe, puedes registrar tus invitados</p>
+          </div>
+          <Form company={company} companys={companys} />
+        </>
+      );
+    }
+
     if (company !== "") {
       if (dataUsers.invitados >= 2) {
         return (
@@ -48,11 +53,7 @@ const LandingForm = () => {
                 {dataUsers.invitados === 1 ? "invitado" : "invitados"}!
               </p>
             </div>
-            <Form
-              country={registerCountry}
-              company={company}
-              companys={companys}
-            />
+            <Form company={company} companys={companys} />
           </>
         );
       }
@@ -84,7 +85,9 @@ const LandingForm = () => {
                       >
                         <option value="">Selecciona tu empresa</option>
                         {companys.map(({ Empresa }) => (
-                          <option value={Empresa}>{Empresa}</option>
+                          <option value={Empresa} key={Empresa}>
+                            {Empresa}
+                          </option>
                         ))}
                       </select>
                     </div>

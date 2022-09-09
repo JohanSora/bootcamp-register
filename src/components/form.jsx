@@ -7,7 +7,7 @@ import { DataContext } from "../DataContext";
 import AddtoCalendar from "./AddtoCalendar";
 import { useEffect } from "react";
 
-const Form = ({ country, company, companys }) => {
+const Form = ({ company, companys }) => {
   const { info, setInfo } = useContext(DataContext);
 
   const [name, setName] = useState("");
@@ -25,17 +25,20 @@ const Form = ({ country, company, companys }) => {
 
   const [modal, setModal] = useState(false);
 
-  const ejemplo = companys.map(({ Dominio }) => Dominio.split(".")[0]);
-  console.log(ejemplo);
+  const companyobj = companys.map(({ Dominio }) => {
+    return Dominio.split(".")[0];
+  });
+
+  const [country] = companys.filter(({ Empresa }) => Empresa === company);
 
   const city = () => {
-    if (country === "Colombia") {
+    if (country.País === "Colombia") {
       return "Bogotá";
     }
-    if (country === "Mexico") {
+    if (country.País === "México") {
       return "Ciudad de México";
     }
-    if (country === "Chile") {
+    if (country.País === "Chile") {
       return "Santiago de Chile";
     }
   };
@@ -43,7 +46,7 @@ const Form = ({ country, company, companys }) => {
   const handleForm = () => {
     const formdata = new FormData();
 
-    formdata.append("País", country);
+    formdata.append("País", country.País);
     formdata.append("Empresa", company);
     formdata.append("Nombre-Completo", name);
     formdata.append("Cargo", occupation);
@@ -85,7 +88,7 @@ const Form = ({ country, company, companys }) => {
         opened={modal}
         onClose={() => {
           const objregister = {
-            País: country,
+            País: country.País,
             Empresa: company,
             "Nombre-Completo": name,
             Cargo: occupation,
@@ -160,8 +163,8 @@ const Form = ({ country, company, companys }) => {
                   const confirmation = e.target.value
                     .split("@")[1]
                     .split(".")[0];
-                  console.log(ejemplo.includes(confirmation));
-                  return ejemplo.includes(confirmation)
+                  console.log(companyobj.includes(confirmation));
+                  return companyobj.includes(confirmation)
                     ? null
                     : (alert(
                         "Lo lamento, no estás dentro de nuestra base de datos de empresas invitadas"
@@ -185,7 +188,11 @@ const Form = ({ country, company, companys }) => {
                   withAsterisk
                   orientation="vertical"
                   value={visit}
-                  label={`Nos visita fuera de ${city()}?`}
+                  label={
+                    company === "ADOBE"
+                      ? "¿Nos visita fuera de Bogotá, Ciudad de México o Santiago de Chile?"
+                      : `Nos visita fuera de ${city()}?`
+                  }
                   onChange={setVisit}
                 >
                   <Radio value="Yes" label="Sí." color="red" />
