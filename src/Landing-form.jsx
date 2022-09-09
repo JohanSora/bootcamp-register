@@ -8,14 +8,13 @@ import Ldin from "./assets/linkedin-icon.png";
 import Youtube from "./assets/you-icon.png";
 import Twit from "./assets/icon-twitter.png";
 import AdobeLg from "./assets/logo Adobe.png";
-import axios from "axios";
 import Form from "./components/form";
 import { DataContext } from "./DataContext";
 
 const LandingForm = () => {
   let [registerCountry, setRegisterCountry] = useState();
   const [company, setCompany] = useState("");
-  const { info } = useContext(DataContext);
+  const { info, companys, setCompanys } = useContext(DataContext);
 
   useEffect(() => {
     const utms = window.location.pathname.split("-");
@@ -52,14 +51,14 @@ const LandingForm = () => {
             <Form
               country={registerCountry}
               company={company}
-              setCompany={setCompany}
+              companys={companys}
             />
           </>
         );
       }
     }
   };
-  console.log(dataUsers);
+
   return (
     <>
       <div id="App">
@@ -84,11 +83,9 @@ const LandingForm = () => {
                         onChange={(e) => setCompany(e.target.value)}
                       >
                         <option value="">Selecciona tu empresa</option>
-                        <option value="AMD">AMD</option>
-                        <option value="Intel">Intel</option>
-                        <option value="Nvidia">Nvidia</option>
-                        <option value="Lenovo">Lenovo</option>
-                        <option value="Dell">Dell</option>
+                        {companys.map(({ Empresa }) => (
+                          <option value={Empresa}>{Empresa}</option>
+                        ))}
                       </select>
                     </div>
                   </div>

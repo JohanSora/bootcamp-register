@@ -7,7 +7,7 @@ import { DataContext } from "../DataContext";
 import AddtoCalendar from "./AddtoCalendar";
 import { useEffect } from "react";
 
-const Form = ({ country, company, setCompany }) => {
+const Form = ({ country, company, companys }) => {
   const { info, setInfo } = useContext(DataContext);
 
   const [name, setName] = useState("");
@@ -25,7 +25,8 @@ const Form = ({ country, company, setCompany }) => {
 
   const [modal, setModal] = useState(false);
 
-  const ejemplo = ["amd", "intel", "nvidia", "lenovo", "dell"];
+  const ejemplo = companys.map(({ Dominio }) => Dominio.split(".")[0]);
+  console.log(ejemplo);
 
   const city = () => {
     if (country === "Colombia") {
@@ -159,6 +160,7 @@ const Form = ({ country, company, setCompany }) => {
                   const confirmation = e.target.value
                     .split("@")[1]
                     .split(".")[0];
+                  console.log(ejemplo.includes(confirmation));
                   return ejemplo.includes(confirmation)
                     ? null
                     : (alert(
