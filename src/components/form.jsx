@@ -212,11 +212,7 @@ const Form = ({ company, companys, country }) => {
                   const repeatEmail = info.map(({ Email }) => Email);
 
                   if (repeatEmail.includes(e.target.value)) {
-                    return (
-                      notify.errEmail(),
-                      alert("Lo sentimos! Este email ya está registrado."),
-                      setEmail("")
-                    );
+                    return notify.errEmail(), setEmail("");
                   }
 
                   if (!companyobj.includes(confirmation)) {
