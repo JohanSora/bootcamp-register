@@ -24,6 +24,8 @@ const LandingForm = () => {
     return infoCompanyObj;
   }, [company, info]);
 
+  const [country] = companys.filter(({ Empresa }) => Empresa === company);
+
   const formApperConditional = () => {
     if (company === "ADOBE") {
       return (
@@ -35,8 +37,6 @@ const LandingForm = () => {
         </>
       );
     }
-
-    const [country] = companys.filter(({ Empresa }) => Empresa === company);
 
     if (company !== "") {
       if (dataUsers.invitados >= country.Cantidad) {
