@@ -31,7 +31,7 @@ const LandingForm = () => {
           <div className="remaining-guests">
             <p>¡Hola Adobe, puedes registrar tus invitados</p>
           </div>
-          <Form company={company} companys={companys} />
+          <Form company={company} companys={companys} country={country} />
         </>
       );
     }
@@ -39,12 +39,12 @@ const LandingForm = () => {
     const [country] = companys.filter(({ Empresa }) => Empresa === company);
 
     if (company !== "") {
-      if (dataUsers.invitados >= 2) {
+      if (dataUsers.invitados >= country.Cantidad) {
         return (
           <div className="remaining-guests">
             <p>
               Muchas gracias por registrarte en nuestro evento, te informamos
-              que ya tienes asignados los dos cupos.
+              que ya tienes asignados todos tus cupos.
             </p>
             <p>
               Si tienes alguna pregunta no dudes en contactarte con{" "}
@@ -58,16 +58,18 @@ const LandingForm = () => {
           </div>
         );
       }
+
       if (dataUsers.invitados >= 0) {
         return (
           <>
             <div className="remaining-guests">
               <p>
-                ¡Hola {company}, puedes registrar {2 - dataUsers.invitados}{" "}
+                ¡Hola {company}, puedes registrar{" "}
+                {country.Cantidad - dataUsers.invitados}{" "}
                 {dataUsers.invitados === 1 ? "invitado" : "invitados"}!
               </p>
             </div>
-            <Form company={company} companys={companys} />
+            <Form company={company} companys={companys} country={country} />
           </>
         );
       }

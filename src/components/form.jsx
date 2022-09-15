@@ -7,7 +7,7 @@ import { DataContext } from "../DataContext";
 import AddtoCalendar from "./AddtoCalendar";
 import { useEffect } from "react";
 
-const Form = ({ company, companys }) => {
+const Form = ({ company, companys, country }) => {
   const { info, setInfo } = useContext(DataContext);
 
   const [name, setName] = useState("");
@@ -28,8 +28,6 @@ const Form = ({ company, companys }) => {
   const companyobj = companys.map(({ Dominio }) => {
     return Dominio.split(".")[0];
   });
-
-  const [country] = companys.filter(({ Empresa }) => Empresa === company);
 
   const city = () => {
     if (country.País === "Colombia") {
@@ -68,8 +66,6 @@ const Form = ({ company, companys }) => {
       });
 
     setModal(true);
-
-    console.log(info);
   };
 
   const handleSubmit = async (e) => {
@@ -81,6 +77,8 @@ const Form = ({ company, companys }) => {
     }
     return handleForm();
   };
+
+  console.log(info);
 
   return (
     <>
@@ -163,15 +161,25 @@ const Form = ({ company, companys }) => {
                   const confirmation = e.target.value
                     .split("@")[1]
                     .split(".")[0];
-                  console.log(companyobj.includes(confirmation));
-                  return companyobj.includes(confirmation)
-                    ? null
-                    : (alert(
-                        "Lo lamento, no estás dentro de nuestra base de datos de empresas invitadas"
-                      ),
+
+                  const repeatEmail = info.map(({ Email }) => Email);
+
+                  console.log(repeatEmail);
+                  if (repeatEmail.includes(e.target.value)) {
+                    return (
+                      alert("Lo sentimos! Este email ya está registrado."),
+                      setEmail("")
+                    );
+                  }
+
+                  if (!companyobj.includes(confirmation)) {
+                    alert(
+                      "Lo lamento, no estás dentro de nuestra base de datos de empresas invitadas."
+                    ),
                       setEmail(""),
                       setName(""),
-                      setOcuppation(""));
+                      setOcuppation("");
+                  }
                 }}
               />
             </div>
