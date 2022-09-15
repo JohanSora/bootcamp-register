@@ -78,8 +78,6 @@ const Form = ({ company, companys, country }) => {
     return handleForm();
   };
 
-  console.log(info);
-
   return (
     <>
       <Modal
@@ -164,7 +162,6 @@ const Form = ({ company, companys, country }) => {
 
                   const repeatEmail = info.map(({ Email }) => Email);
 
-                  console.log(repeatEmail);
                   if (repeatEmail.includes(e.target.value)) {
                     return (
                       alert("Lo sentimos! Este email ya está registrado."),
