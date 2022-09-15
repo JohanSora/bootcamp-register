@@ -5,7 +5,8 @@ import AdobeLg from "../assets/logo Adobe.png";
 import axios from "axios";
 import { DataContext } from "../DataContext";
 import AddtoCalendar from "./AddtoCalendar";
-import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Form = ({ company, companys, country }) => {
   const { info, setInfo } = useContext(DataContext);
@@ -41,6 +42,44 @@ const Form = ({ company, companys, country }) => {
     }
   };
 
+  const notify = {
+    errDomain: () =>
+      toast.error(
+        "Lo lamentamos, no estás dentro de nuestra base de datos de empresas invitadas.",
+        {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      ),
+
+    errEmail: () =>
+      toast.error("Lo sentimos! Este email ya está registrado.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }),
+
+    errCity: () =>
+      toast.warn(`¿Nos visitas fuera de ${city()}?`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }),
+  };
+
   const handleForm = () => {
     const formdata = new FormData();
 
@@ -72,14 +111,24 @@ const Form = ({ company, companys, country }) => {
     e.preventDefault();
 
     if (visit === "") {
-      alert("¿Nos visitas fuera de la ciudad de bogotá?");
-      return;
+      return notify.errCity();
     }
     return handleForm();
   };
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Modal
         opened={modal}
         onClose={() => {
@@ -164,18 +213,19 @@ const Form = ({ company, companys, country }) => {
 
                   if (repeatEmail.includes(e.target.value)) {
                     return (
+                      notify.errEmail(),
                       alert("Lo sentimos! Este email ya está registrado."),
                       setEmail("")
                     );
                   }
 
                   if (!companyobj.includes(confirmation)) {
-                    alert(
-                      "Lo lamento, no estás dentro de nuestra base de datos de empresas invitadas."
-                    ),
+                    return (
+                      notify.errDomain(),
                       setEmail(""),
                       setName(""),
-                      setOcuppation("");
+                      setOcuppation("")
+                    );
                   }
                 }}
               />
