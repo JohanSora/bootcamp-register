@@ -4,6 +4,7 @@ import axios from "axios";
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
+  console.log("a");
   const [info, setInfo] = useState([]);
   useEffect(() => {
     axios
