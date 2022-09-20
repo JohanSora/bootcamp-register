@@ -5,37 +5,37 @@ const AddtoCalendar = ({ country }) => {
     apple:
       country.País === "Colombia"
         ? "https://www.addevent.com/event/WU14903544+apple"
-        : country.País === "Mexico"
+        : country.País === "México"
         ? "https://www.addevent.com/event/em14903704+apple"
         : "https://www.addevent.com/event/Xa14903729+apple",
     google:
       country.País === "Colombia"
         ? "https://www.addevent.com/event/WU14903544+google"
-        : country.País === "Mexico"
+        : country.País === "México"
         ? "https://www.addevent.com/event/em14903704+google"
         : "https://www.addevent.com/event/Xa14903729+google",
     office365:
       country.País === "Colombia"
         ? "https://www.addevent.com/event/WU14903544+office365"
-        : country.País === "Mexico"
+        : country.País === "México"
         ? "https://www.addevent.com/event/em14903704+office365"
         : "https://www.addevent.com/event/Xa14903729+office365",
     outlook:
       country.País === "Colombia"
         ? "https://www.addevent.com/event/WU14903544+outlook"
-        : country.País === "Mexico"
+        : country.País === "México"
         ? "https://www.addevent.com/event/em14903704+outlook"
         : "https://www.addevent.com/event/Xa14903729+outlook",
     outlookcom:
       country.País === "Colombia"
         ? "https://www.addevent.com/event/WU14903544+outlookcom"
-        : country.País === "Mexico"
+        : country.País === "México"
         ? "https://www.addevent.com/event/em14903704+outlookcom"
         : "https://www.addevent.com/event/Xa14903729+outlookcom",
     yahoo:
       country.País === "Colombia"
         ? "https://www.addevent.com/event/WU14903544+yahoo"
-        : country.País === "Mexico"
+        : country.País === "México"
         ? "https://www.addevent.com/event/em14903704+yahoo"
         : "https://www.addevent.com/event/Xa14903729+yahoo",
   };
