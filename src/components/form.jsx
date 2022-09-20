@@ -7,6 +7,7 @@ import { DataContext } from "../DataContext";
 import AddtoCalendar from "./AddtoCalendar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddToCalendarAdobe from "./AddToCalendarAdobe";
 
 const Form = ({ company, companys, country }) => {
   const { info, setInfo } = useContext(DataContext);
@@ -169,7 +170,11 @@ const Form = ({ company, companys, country }) => {
         <div className="info-modal">
           <img src={AdobeLg} alt="adobelogo" width={166} />
           <p>Muchas gracias, recibimos los datos del invitado con Exito.</p>
-          <AddtoCalendar country={country} />
+          {company === "ADOBE" ? (
+            <AddToCalendarAdobe />
+          ) : (
+            <AddtoCalendar country={country} />
+          )}
         </div>
       </Modal>
       <form onSubmit={handleSubmit} autoComplete="on">

@@ -3,39 +3,39 @@ import React from "react";
 const AddtoCalendar = ({ country }) => {
   const addtocalendarCountry = {
     apple:
-      country === "Colombia"
+      country.País === "Colombia"
         ? "https://www.addevent.com/event/WU14903544+apple"
-        : country === "Mexico"
+        : country.País === "Mexico"
         ? "https://www.addevent.com/event/em14903704+apple"
         : "https://www.addevent.com/event/Xa14903729+apple",
     google:
-      country === "Colombia"
+      country.País === "Colombia"
         ? "https://www.addevent.com/event/WU14903544+google"
-        : country === "Mexico"
+        : country.País === "Mexico"
         ? "https://www.addevent.com/event/em14903704+google"
         : "https://www.addevent.com/event/Xa14903729+google",
     office365:
-      country === "Colombia"
+      country.País === "Colombia"
         ? "https://www.addevent.com/event/WU14903544+office365"
-        : country === "Mexico"
+        : country.País === "Mexico"
         ? "https://www.addevent.com/event/em14903704+office365"
         : "https://www.addevent.com/event/Xa14903729+office365",
     outlook:
-      country === "Colombia"
+      country.País === "Colombia"
         ? "https://www.addevent.com/event/WU14903544+outlook"
-        : country === "Mexico"
+        : country.País === "Mexico"
         ? "https://www.addevent.com/event/em14903704+outlook"
         : "https://www.addevent.com/event/Xa14903729+outlook",
     outlookcom:
-      country === "Colombia"
+      country.País === "Colombia"
         ? "https://www.addevent.com/event/WU14903544+outlookcom"
-        : country === "Mexico"
+        : country.País === "Mexico"
         ? "https://www.addevent.com/event/em14903704+outlookcom"
         : "https://www.addevent.com/event/Xa14903729+outlookcom",
     yahoo:
-      country === "Colombia"
+      country.País === "Colombia"
         ? "https://www.addevent.com/event/WU14903544+yahoo"
-        : country === "Mexico"
+        : country.País === "Mexico"
         ? "https://www.addevent.com/event/em14903704+yahoo"
         : "https://www.addevent.com/event/Xa14903729+yahoo",
   };
