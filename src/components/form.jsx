@@ -27,6 +27,8 @@ const Form = ({ company, companys, country }) => {
 
   const [modal, setModal] = useState(false);
 
+  console.log(datearrival, dateexit);
+
   const companyobj = companys.map(({ Dominio }) => {
     return Dominio.split(".")[0];
   });
@@ -91,12 +93,12 @@ const Form = ({ company, companys, country }) => {
     formdata.append("Email", email);
     formdata.append("Nacionalidad", Nacionality);
     formdata.append("Visita-fuera-de-la-ciudad?", visit);
-    formdata.append("Fecha-de-nacimiento", dateBorn);
+    formdata.append("Fecha-de-nacimiento", String(dateBorn));
     formdata.append("Dirección", address);
     formdata.append("#pasaporte", passport);
-    formdata.append("día-de-llegada", datearrival);
+    formdata.append("día-de-llegada", String(datearrival));
     formdata.append("hora-de-llegada", timearrival);
-    formdata.append("dia-de-salida", dateexit);
+    formdata.append("dia-de-salida", String(dateexit));
     formdata.append("hora-de-salida", timeexit);
 
     axios
