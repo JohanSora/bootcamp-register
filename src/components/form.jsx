@@ -28,8 +28,6 @@ const Form = ({ companys, country }) => {
 
   const [modal, setModal] = useState(false);
 
-  console.log(datearrival, dateexit);
-
   const city = () => {
     if (country.País === "Colombia") {
       return "Bogotá";
