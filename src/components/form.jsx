@@ -9,11 +9,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddToCalendarAdobe from "./AddToCalendarAdobe";
 
-const Form = ({ company, companys, country }) => {
+const Form = ({ companys, country }) => {
   const { info, setInfo } = useContext(DataContext);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [company, setCompany] = useState("");
   const [occupation, setOcuppation] = useState("");
   const [visit, setVisit] = useState("");
   const [Nacionality, setNacionality] = useState("");
@@ -28,10 +29,6 @@ const Form = ({ company, companys, country }) => {
   const [modal, setModal] = useState(false);
 
   console.log(datearrival, dateexit);
-
-  const companyobj = companys.map(({ Dominio }) => {
-    return Dominio.split(".")[0];
-  });
 
   const city = () => {
     if (country.País === "Colombia") {
@@ -161,6 +158,7 @@ const Form = ({ company, companys, country }) => {
           setNacionality("");
           setDateBorn("");
           setAdress("");
+          setCompany("");
           setPassport("");
           setDatearrival("");
           setTimearrival("");
@@ -172,11 +170,7 @@ const Form = ({ company, companys, country }) => {
         <div className="info-modal">
           <img src={AdobeLg} alt="adobelogo" width={166} />
           <p>Muchas gracias, recibimos los datos del invitado con Exito.</p>
-          {company === "ADOBE" ? (
-            <AddToCalendarAdobe />
-          ) : (
-            <AddtoCalendar country={country} />
-          )}
+          {<AddtoCalendar country={country} />}
         </div>
       </Modal>
       <form onSubmit={handleSubmit} autoComplete="on">
@@ -231,6 +225,16 @@ const Form = ({ company, companys, country }) => {
                     );
                   }
                 }}
+              />
+            </div>
+            <div className="form-input">
+              <label htmlFor="compañía">Empresa:</label>
+              <input
+                type="text"
+                autoComplete="on"
+                value={company}
+                required
+                onChange={(e) => setCompany(e.target.value)}
               />
             </div>
           </div>

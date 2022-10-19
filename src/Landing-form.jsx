@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useMemo, useRef } from "react";
+import React, { useContext, useMemo } from "react";
 import { useState } from "react";
 import Banner from "./assets/banner.png";
-import { Radio, Modal } from "@mantine/core";
 import Face from "./assets/face-icon.png";
 import Insta from "./assets/insta-icon.png";
 import Ldin from "./assets/linkedin-icon.png";
@@ -32,56 +31,6 @@ const LandingForm = () => {
 
   const [country] = companys.filter(({ Empresa }) => Empresa === company);
 
-  const formApperConditional = () => {
-    if (company === "ADOBE") {
-      return (
-        <>
-          <div className="remaining-guests">
-            <p>¡Hola Adobe, puedes registrar tus invitados</p>
-          </div>
-          <Form company={company} companys={companys} country={country} />
-        </>
-      );
-    }
-
-    if (company !== "") {
-      if (dataUsers.invitados >= country.Cantidad) {
-        return (
-          <div className="remaining-guests">
-            <p>
-              Muchas gracias por registrarte en nuestro evento, te informamos
-              que ya tienes asignados todos tus cupos.
-            </p>
-            <p>
-              Si tienes alguna pregunta no dudes en contactarte con{" "}
-              {country.País === "Colombia"
-                ? "mar31510@adobe.com y sou52478@adobe.com"
-                : country.País === "México"
-                ? "mar31510@adobe.com"
-                : "sou52478@adobe.com"}
-              .
-            </p>
-          </div>
-        );
-      }
-
-      if (dataUsers.invitados >= 0) {
-        return (
-          <>
-            <div className="remaining-guests">
-              <p>
-                ¡Hola {company}, puedes registrar{" "}
-                {country.Cantidad - dataUsers.invitados}{" "}
-                {dataUsers.invitados === 1 ? "invitado" : "invitados"}!
-              </p>
-            </div>
-            <Form company={company} companys={companys} country={country} />
-          </>
-        );
-      }
-    }
-  };
-
   return (
     <>
       <div id="App">
@@ -95,28 +44,7 @@ const LandingForm = () => {
           </p>
           <div className="box-form-landing">
             <div className="form-landing">
-              <form action="submit" className="companyform">
-                <div className="form-and-extra-info">
-                  <div className="container-form-inputs">
-                    <div className="form-input">
-                      <label htmlFor="empresa">Empresa:</label>
-                      <select
-                        name="company"
-                        required
-                        onChange={(e) => setCompany(e.target.value)}
-                      >
-                        <option value="">Selecciona tu empresa</option>
-                        {companys.map(({ Empresa }) => (
-                          <option value={Empresa} key={Empresa}>
-                            {Empresa}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </form>
-              {formApperConditional()}
+              {<Form companys={companys} country={{ País: "Colombia" }} />}
               <h2 className="acrobat-resolve">¡Acrobat lo resuelve!</h2>
             </div>
           </div>
