@@ -9,16 +9,10 @@ import Twit from "./assets/icon-twitter.png";
 import AdobeLg from "./assets/logo Adobe.png";
 import Form from "./components/form";
 import { DataContext } from "./DataContext";
-import ReactGA from "react-ga";
-const TRACKING_ID = "UA-172127471-1";
-
-ReactGA.initialize(TRACKING_ID);
 
 const LandingForm = () => {
   const [company, setCompany] = useState("");
   const { info, companys, setCompanys } = useContext(DataContext);
-
-  ReactGA.pageview("/eventobootcamp");
 
   const dataUsers = useMemo(() => {
     const infoCompany = info.filter(({ Empresa }) => Empresa === company);
